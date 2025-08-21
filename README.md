@@ -22,13 +22,19 @@ The game demonstrates the use of **interrupts, real-time clock input, and direct
 - Timer interrupt handling for automatic movement and event timing.  
 
 ## How to Run
-1. Assemble the code with **MASM** or **TASM**.  
-2. Run the program in **DOSBox** or a **FreeDOS** environment.  
-3. Control the player using **WASD keys**.  
+1. Open **DOSBox** or a **FreeDOS** environment.  
+2. Assemble and link the code with:  
+   ```
+   ml /Zm game.asm
+   ```  
+3. Run the program by typing:  
+   ```
+   game.exe
+   ```  
+4. Control the player using **WASD keys**.  
 
 ## Screenshots
 Here are screenshots of the game running:
 
 ![Game Screenshot 1](screenshot1.png)  
 ![Game Screenshot 2](screenshot2.png)  
-
