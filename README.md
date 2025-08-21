@@ -27,4 +27,8 @@ The game demonstrates the use of **interrupts, real-time clock input, and direct
 3. Control the player using **WASD keys**.  
 
 ## Screenshots
+Here are screenshots of the game running:
+
+![Game Screenshot 1](screenshot1.png)  
+![Game Screenshot 2](screenshot2.png)  
 
