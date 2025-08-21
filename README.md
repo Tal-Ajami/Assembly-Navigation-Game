@@ -25,11 +25,11 @@ The game demonstrates the use of **interrupts, real-time clock input, and direct
 1. Open **DOSBox** or a **FreeDOS** environment.  
 2. Assemble and link the code with:  
    ```
-   ml /Zm game.asm
+   ml /Zm NavigationGame.asm
    ```  
 3. Run the program by typing:  
    ```
-   game.exe
+   NavigationGame.exe
    ```  
 4. Control the player using **WASD keys**.  
 
