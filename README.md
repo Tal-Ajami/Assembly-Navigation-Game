@@ -38,3 +38,71 @@ Here are screenshots of the game running:
 
 ![Game Screenshot 1](screenshot1.png)  
 ![Game Screenshot 2](screenshot2.png)  
+
+## Code Example
+
+Here is a snippet from the custom interrupt service routine (ISR),
+which handles player movement and point aging logic:
+
+```asm
+NEW_ISR proc far uses ax bx dx es
+
+    mov ax, END_GAME
+    cmp ax, 1
+    je END_OF_ISR2
+
+    ; handle last pressed key (W/A/S/D/T)
+    mov al, LAST_PRESSED
+    cmp al, 'W'
+    je W_PRESSED_ISR
+    cmp al, 'A'
+    je A_PRESSED_ISR
+    cmp al, 'S'
+    je S_PRESSED_ISR
+    cmp al, 'D'
+    je D_PRESSED_ISR
+    cmp al, 'T'
+    je T_PRESSED_ISR
+
+    ; check point timer to age or remove points
+    mov ax, POINT_TIMER
+    cmp ax, 60
+    je POINT_TIMER_IS_60
+    cmp ax, 120
+    je POINT_TIMER_IS_120
+
+    jmp NOT_60_OR_120
+
+POINT_TIMER_IS_60:
+    ; change point color after 3 seconds
+    mov bx, POINT_LOCATION
+    mov al, POINT_SYMBOL
+    mov ah, 0EFh
+    mov es:[bx], ax
+    jmp END_OF_ISR2
+
+POINT_TIMER_IS_120:
+    ; remove point after 6 seconds
+    mov al, POINT_SYMBOL
+    dec al
+    mov POINT_SYMBOL, al
+    mov bx, POINT_LOCATION
+    mov al, ' '
+    mov ah, 0
+    mov es:[bx], ax
+    call PRINT_POINT
+    jmp END_OF_ISR2
+
+NOT_60_OR_120:
+    inc POINT_TIMER
+
+END_OF_ISR2:
+    ; restore previous ISR
+    int 80h
+
+    mov al, 20h
+    out 20h, al
+
+    iret
+NEW_ISR endp
+
